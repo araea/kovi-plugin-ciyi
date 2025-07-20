@@ -19,11 +19,11 @@ pub const DEFAULT_COMMANDS_STR: &str = r#"
 
 [[command]]
 function = "查看插件指令列表"
-commands = ["词意指令", "词意帮助", "词意指令列表", "词意帮助列表"]
+commands = ["词意帮助", "词意指令", "词意指令列表", "词意帮助列表"]
 
 [[command]]
 function = "查看词意游戏规则"
-commands = ["词意规则", "词意玩法"]
+commands = ["词意玩法", "词意规则"]
 
 [[command]]
 function = "猜测两字词语"
