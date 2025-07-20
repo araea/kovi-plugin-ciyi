@@ -88,7 +88,7 @@ impl CiYiGameState {
                 self.last_start_time = Utc::now();
                 self.is_finished = false;
             } else {
-                return ("今日已结束 请明天再来".to_string(), false);
+                return ("今日已结束 明天再来玩吧".to_string(), false);
             }
         }
 
