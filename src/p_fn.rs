@@ -31,8 +31,7 @@ pub fn show_commands() -> String {
 }
 
 pub fn show_rules() -> String {
-    format!(
-        "\
+    "\
 目标
     猜出系统选择的两字词语
 
@@ -46,7 +45,7 @@ pub fn show_rules() -> String {
 周期
     每日一词，猜对则次日刷新
     系统记录猜对次数，可查排行"
-    )
+        .to_string()
 }
 
 pub async fn guess_word(
