@@ -113,7 +113,7 @@ async fn main() {
                                     &game_manager.get_global_leaderboard(),
                                 );
                             }
-                            "切换直接猜测模式" => {
+                            "切换猜测模式" => {
                                 let response =
                                     game_manager.toggle_direct_guess_mode(&group_id).await;
                                 p_fn::build_and_send_message(&event, &response);
