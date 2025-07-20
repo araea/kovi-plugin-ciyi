@@ -81,7 +81,7 @@ impl CiYiGameState {
                 match fetch_words_rank_list(&self.target_word).await {
                     Ok(list) => self.words_rank_list = list,
                     Err(e) => {
-                        return (format!("获取词语排名失败：{}", e), false);
+                        return (format!("获取词语排名失败：{e}"), false);
                     }
                 }
                 self.global_history.insert(self.target_word.clone());
@@ -96,17 +96,17 @@ impl CiYiGameState {
             match fetch_words_rank_list(&self.target_word).await {
                 Ok(list) => self.words_rank_list = list,
                 Err(e) => {
-                    return (format!("获取词语排名失败：{}", e), false);
+                    return (format!("获取词语排名失败：{e}"), false);
                 }
             }
         }
 
         if self.current_guesses.contains(&guess_word) {
-            return (format!("{} 已猜过", guess_word), false);
+            return (format!("{guess_word} 已猜过"), false);
         }
 
         if !ALL_WORDS.contains(&guess_word) {
-            return (format!("{} 不在词库中", guess_word), false);
+            return (format!("{guess_word} 不在词库中"), false);
         }
 
         self.current_guesses.insert(guess_word.clone());
@@ -134,10 +134,7 @@ impl CiYiGameState {
                     .and_then(|w| w.chars().next())
                     .map_or('？', |c| c);
 
-                let hint_text = format!(
-                    "？{} ) {} ( {}？ #{}",
-                    prev_char, guess_word, next_char, rank
-                );
+                let hint_text = format!("？{prev_char} ) {guess_word} ( {next_char}？ #{rank}");
 
                 self.hints.push(Hint {
                     text: hint_text,
@@ -155,7 +152,7 @@ impl CiYiGameState {
                 .map(|(i, hint)| format!("{}. {}\n", i + 1, hint.text))
                 .collect();
 
-            (format!("{}...", hints_str), false)
+            (format!("{hints_str}..."), false)
         }
     }
 }
@@ -199,7 +196,7 @@ impl CiYiGameManager {
                 global_history: HashSet::from([target.to_string()]),
                 current_guesses: HashSet::new(),
                 words_rank_list: fetch_words_rank_list(target).await.unwrap_or_else(|_e| {
-                    log::error!("Failed to fetch rank list for {}: {}", target, _e);
+                    log::error!("Failed to fetch rank list for {target}: {_e}");
                     Vec::new()
                 }),
                 hints: Vec::new(),
@@ -300,10 +297,7 @@ impl CiYiGameManager {
 }
 
 async fn fetch_words_rank_list(word: &str) -> Result<Vec<String>, Box<dyn Error>> {
-    let url = format!(
-        "https://ci-ying.oss-cn-zhangjiakou.aliyuncs.com/v1/ci-yi-list/{}.txt",
-        word
-    );
+    let url = format!("https://ci-ying.oss-cn-zhangjiakou.aliyuncs.com/v1/ci-yi-list/{word}.txt");
     let response = reqwest::get(&url).await?;
     let response = response.error_for_status()?;
     let body_text = response.text().await?;

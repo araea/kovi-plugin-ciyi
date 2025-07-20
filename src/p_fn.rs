@@ -22,7 +22,7 @@ pub fn show_commands() -> String {
             if prefix.is_empty() {
                 first_cmd.to_string()
             } else {
-                format!("{} {}", prefix, first_cmd)
+                format!("{prefix} {first_cmd}")
             }
         })
         .collect();
