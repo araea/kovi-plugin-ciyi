@@ -1,4 +1,4 @@
-use kovi::chrono::{DateTime, Utc};
+use kovi::chrono::{DateTime, Duration, Utc};
 use kovi::log;
 use kovi::utils::{load_json_data, save_json_data};
 use serde::{Deserialize, Serialize};
@@ -62,9 +62,20 @@ pub struct CiYiGameState {
 }
 
 impl CiYiGameState {
+    pub fn is_new_day_in_china_timezone(&self) -> bool {
+        const CHINA_TIMEZONE_OFFSET_HOURS: i64 = 8;
+
+        let now_in_china_tz = Utc::now() + Duration::hours(CHINA_TIMEZONE_OFFSET_HOURS);
+
+        let last_start_in_china_tz =
+            self.last_start_time + Duration::hours(CHINA_TIMEZONE_OFFSET_HOURS);
+
+        now_in_china_tz.date_naive() != last_start_in_china_tz.date_naive()
+    }
+
     pub async fn guess(&mut self, guess_word: String) -> (String, bool) {
         if self.is_finished {
-            if Utc::now().date_naive() != self.last_start_time.date_naive() {
+            if self.is_new_day_in_china_timezone() {
                 let candidates: Vec<&str> = QUESTION_WORDS
                     .iter()
                     .map(|w| w.as_str())
@@ -88,7 +99,7 @@ impl CiYiGameState {
                 self.last_start_time = Utc::now();
                 self.is_finished = false;
             } else {
-                return ("今日已结束 明天再来玩吧".to_string(), false);
+                return ("每天只能玩一次哦！".to_string(), false);
             }
         }
 

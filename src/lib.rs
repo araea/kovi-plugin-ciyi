@@ -4,7 +4,6 @@ mod p_config;
 mod p_const;
 mod p_fn;
 
-use kovi::chrono::Utc;
 use kovi::tokio::sync::Mutex;
 use std::sync::Arc;
 
@@ -74,8 +73,7 @@ async fn main() {
                     let mut game_manager = game_manager.lock().await;
                     let state = game_manager.get(&group_id).await;
 
-                    if (state.last_start_time.date_naive() != Utc::now().date_naive()
-                        || !state.is_finished)
+                    if (state.is_new_day_in_china_timezone() || !state.is_finished)
                         && state.direct_guess_enabled
                     {
                         let response = p_fn::guess_word(&event, &[text], &mut game_manager).await;
