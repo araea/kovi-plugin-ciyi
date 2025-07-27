@@ -10,7 +10,7 @@ mod ciyi_game {
     use kovi::utils::{load_json_data, save_json_data};
     use serde::{Deserialize, Serialize};
     use std::cmp::Ordering;
-    
+
     use std::collections::{HashMap, HashSet};
     use std::error::Error;
     use std::path::PathBuf;
@@ -118,7 +118,7 @@ mod ciyi_game {
 
         pub fn save(&self) {
             if let Err(e) = save_json_data(self, &self.data_file_path) {
-                log::error!("Failed to save ciyi game data: {}", e);
+                log::error!("Failed to save ciyi game data: {e}");
             }
         }
 
@@ -670,12 +670,10 @@ mod p_fn {
             None
         };
 
-        let response = {
+        {
             let mut manager = game_manager_mutex.lock().unwrap();
             manager.commit_guess(&group_id, &user_id, &username, guess_word, fetched_data)
-        };
-
-        response
+        }
     }
 
     pub fn should_process_group(
