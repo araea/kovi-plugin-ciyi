@@ -1,7 +1,8 @@
-# kovi-plugin-ciyi
+kovi-plugin-ciyi
+================
 
-[![github](https://img.shields.io/badge/github-araea/kovi_plugin_ciyi-8da0cb?style=for-the-badge&labelColor=555555&logo=github)](https://github.com/araea/kovi-plugin-ciyi)
-[![crates.io](https://img.shields.io/crates/v/kovi-plugin-ciyi.svg?style=for-the-badge&color=fc8d62&logo=rust)](https://crates.io/crates/kovi-plugin-ciyi)
+[<img alt="github" src="https://img.shields.io/badge/github-araea/kovi_plugin_ciyi-8da0cb?style=for-the-badge&labelColor=555555&logo=github" height="20">](https://github.com/araea/kovi-plugin-ciyi)
+[<img alt="crates.io" src="https://img.shields.io/crates/v/kovi-plugin-ciyi.svg?style=for-the-badge&color=fc8d62&logo=rust" height="20">](https://crates.io/crates/kovi-plugin-ciyi)
 
 Kovi 的词意（猜词游戏）插件。
 通过猜测两字词语，根据相似度提示找出目标词语。
@@ -106,8 +107,19 @@ commands = ["切换猜测模式"]
 - [Kovi](https://kovi.threkork.com/)
 - [词影](https://cy.surprising.studio/)
 
----
+<br>
 
-_Licensed under either of [Apache License, Version 2.0](LICENSE-APACHE) or [MIT license](LICENSE-MIT) at your option._
+#### License
 
-_Unless you explicitly state otherwise, any contribution intentionally submitted for inclusion in this crate by you, as defined in the Apache-2.0 license, shall be dual licensed as above, without any additional terms or conditions._
+<sup>
+Licensed under either of <a href="LICENSE-APACHE">Apache License, Version
+2.0</a> or <a href="LICENSE-MIT">MIT license</a> at your option.
+</sup>
+
+<br>
+
+<sub>
+Unless you explicitly state otherwise, any contribution intentionally submitted
+for inclusion in this crate by you, as defined in the Apache-2.0 license, shall
+be dual licensed as above, without any additional terms or conditions.
+</sub>
