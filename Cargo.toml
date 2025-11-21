@@ -1,7 +1,8 @@
 [package]
 name = "kovi-plugin-ciyi"
-version = "0.1.6"
+version = "0.1.7"
 edition = "2024"
+documentation = false
 license = "MIT OR Apache-2.0"
 authors = ["Nawyjx <3373167460@qq.com>"]
 description = "Kovi 的词意（猜词游戏）插件。"
