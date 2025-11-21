@@ -823,8 +823,8 @@ async fn main() {
                 }
 
                 // 指令解析
-                if let Some((cmd, params)) = p_fn::parse_command(text, &config.plugin.prefixes) {
-                    if let Some(function) = command_map.get_function_by_command(cmd) {
+                if let Some((cmd, params)) = p_fn::parse_command(text, &config.plugin.prefixes)
+                    && let Some(function) = command_map.get_function_by_command(cmd) {
                         match function.as_str() {
                             "查看插件指令列表" => {
                                 p_fn::build_and_send_message(&event, &p_fn::show_commands());
@@ -861,7 +861,6 @@ async fn main() {
                             _ => {}
                         }
                     }
-                }
             }
         }
     });
